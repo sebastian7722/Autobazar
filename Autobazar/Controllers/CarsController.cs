@@ -151,4 +151,9 @@ public class CarsController : Controller
     {
         return _context.Cars.Any(e => e.Id == id);
     }
+
+    public async Task<IActionResult> Statistics()
+    {
+        return View(await _context.Cars.ToListAsync());
+    }
 }
