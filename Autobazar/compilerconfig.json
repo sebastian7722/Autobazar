@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/site.css",
+    "inputFile": "wwwroot/sass/site.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/views/home.css",
+    "inputFile": "wwwroot/sass/views/home.scss"
+  },
+]

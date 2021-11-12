@@ -1,56 +1,16 @@
-﻿@model IEnumerable<Autobazar.Models.Car>
+﻿@model Autobazar.Models.CarStatistics
 
 @{
     ViewData["Title"] = "Statistiky";
 }
 
-@{
-    int CarTotal = 0;
-    int underOneHundred = 0;
-    int aboveOneHundred = 0;
-    int PetrolTotal = 0;
-    int DieselTotal = 0;
-    int ElectroTotal = 0;
-    int GasTotal = 0;
-    if(Model != null)
-    {
-        CarTotal = Model.Count(); 
-        foreach(Car item in Model)
-        {
-            int CarTachometer = item.Tachometer;
-            Fuel CarFuel = item.Fuels;
-
-            if(CarTachometer >= 100000)
-                aboveOneHundred++;
-            if (CarTachometer < 100000)
-                underOneHundred++;
-
-            switch (CarFuel)
-            {
-                case Fuel.Petrol:
-                    PetrolTotal++;
-                    break;
-                case Fuel.Diesel:
-                    DieselTotal++;
-                    break;
-                case Fuel.Electricity:
-                    ElectroTotal++;
-                    break;
-                case Fuel.Gas:
-                    GasTotal++;
-                    break;
-            }
-        }
-    }
-}
-
 <h2 class="display-5 text-center">Statistiky našich vozů</h2>
-<h5>Celkový počet vozidel: @CarTotal</h5>
-<h5>Vozidla do 100 000 km: @underOneHundred</h5>
-<h5>Vozidla nad 100 000 km: @aboveOneHundred</h5>
-<h5>Benzínová vozidla: @PetrolTotal</h5>
-<h5>Naftová vozidla: @DieselTotal</h5>
-<h5>Elektroauta: @ElectroTotal</h5>
-<h5>Auta na alternativní paliva: @GasTotal</h5>
-<h5>Vozidla ve výborném stavu: @CarTotal</h5>
-<h5>Vozidla ve špatném stavu: 0</h5>
+<h5>Celkový počet vozidel: @Model.CarsTotal</h5>
+<h5>Vozidla do 100 000 km: @Model.UnderOneHundredTotal</h5>
+<h5>Vozidla nad 100 000 km: @Model.AboveOneHundredTotal</h5>
+<h5>Benzínová vozidla: @Model.PetrolTotal</h5>
+<h5>Naftová vozidla: @Model.DieselTotal</h5>
+<h5>Elektroauta: @Model.ElectroTotal</h5>
+<h5>Auta na alternativní paliva: @Model.GasTotal</h5>
+<h5>Vozidla ve výborném stavu: @Model.ConditionGoodTotal</h5>
+<h5>Vozidla ve špatném stavu: @Model.ConditionBadTotal</h5>

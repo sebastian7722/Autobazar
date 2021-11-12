@@ -53,13 +53,14 @@ public class CarsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Manufacturer,Model,ManufacturingDate,Tachometer,Fuels,Bodies,Spz,InBazarFrom,Note")] Car car)
+    public async Task<IActionResult> Create([Bind("Id,Manufacturer,Model,ManufacturingDate,Tachometer,Fuels,Bodies,Spz,Conditions,InBazarFrom,Note")] Car car)
     {
         if (ModelState.IsValid)
         {
             _context.Add(car);
+            int CurrentCarId = _context.Cars.Count() + 1;
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), new { id = CurrentCarId });
         }
         return View(car);
     }
@@ -85,7 +86,7 @@ public class CarsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Manufacturer,Model,ManufacturingDate,Tachometer,Fuels,Bodies,Spz,InBazarFrom,Note")] Car car)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Manufacturer,Model,ManufacturingDate,Tachometer,Fuels,Bodies,Spz,Conditions,InBazarFrom,Note")] Car car)
     {
         if (id != car.Id)
         {
@@ -139,7 +140,7 @@ public class CarsController : Controller
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var car = await _context.Cars.FindAsync(id);
-        if(car is not null)
+        if (car is not null)
         {
             _context.Cars.Remove(car);
         }
@@ -152,8 +153,42 @@ public class CarsController : Controller
         return _context.Cars.Any(e => e.Id == id);
     }
 
+    //GET: Car/Statistics
     public async Task<IActionResult> Statistics()
     {
-        return View(await _context.Cars.ToListAsync());
+        var cars = await _context.Cars.ToListAsync();
+
+        var pseudoModel = new CarStatistics
+        {
+            CarsTotal = cars.Count,
+            UnderOneHundredTotal = cars.Count(x => x.Tachometer < 100000),
+            AboveOneHundredTotal = cars.Count(x => x.Tachometer >= 100000),
+            PetrolTotal = cars.Count(x => x.Fuels == Fuel.Petrol),
+            DieselTotal = cars.Count(x => x.Fuels == Fuel.Diesel),
+            ElectroTotal = cars.Count(x => x.Fuels == Fuel.Electricity),
+            GasTotal = cars.Count(x => x.Fuels == Fuel.Gas),
+            ConditionGoodTotal = cars.Count(x => x.Conditions == Condition.Good),
+            ConditionBadTotal = cars.Count(x => x.Conditions == Condition.Bad),
+        };
+
+        //var FinalModel = _context.Cars.ToListAsync();
+
+        return View(pseudoModel);
+    }
+
+    //Validation of existing SPZ
+    [AcceptVerbs("GET", "POST")]
+    public async Task<IActionResult> VerifySpz(string spz, int Id)
+    {
+        var editedCar = await _context.Cars.FirstOrDefaultAsync(x => x.Id == Id);
+        var carWithSameSpz = await _context.Cars.FirstOrDefaultAsync(x => x.Spz == spz);
+        var errorMsg = Json($"Státní značka {spz} se již používá.");
+
+        if(carWithSameSpz==null || carWithSameSpz.Id == editedCar?.Id)
+        {
+            return Json(true);
+        }
+
+        return errorMsg;
     }
 }

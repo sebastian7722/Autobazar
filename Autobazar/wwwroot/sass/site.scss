@@ -1,0 +1,44 @@
+﻿@import "partials/_variables";
+@import "mixins/_breakpoints";
+@import "partials/_navbar";
+
+*, *::before, *::after {
+    /*font-family: 'Noto Sans', sans-serif;*/
+    font-family: 'Open Sans', sans-serif;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
+
+    @include media-up($breakpoint-md) {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    padding: 19.1px 0;
+
+    @include media-up($breakpoint-md) {
+        padding: 17.5px 0;
+    }
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-hover);
+}
