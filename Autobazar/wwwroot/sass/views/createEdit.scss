@@ -1,0 +1,19 @@
+﻿@import "../mixins/_breakpoints";
+@import "../partials/_variables";
+
+.form-container {
+
+    min-height: calc(100vh - (#{$nav-height-xs} + #{$footer-height}));
+
+    @include media-up($breakpoint-sm) {
+        min-height: calc(100vh - (#{$nav-height-sm} + #{$footer-height}));
+    }
+
+    @include media-up($breakpoint-md) {
+        min-height: calc(100vh - (#{$nav-height-md} + #{$footer-height}));
+    }
+}
+
+.form-label {
+    font-weight: 500;
+}

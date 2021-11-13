@@ -1,84 +1,118 @@
 ﻿@model IEnumerable<Autobazar.Models.Car>
 
-@{
-    ViewData["Title"] = "Index";
+@section Styles {
+<link rel="stylesheet" href="~/css/views/list.css" />
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ManufacturingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tachometer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fuels)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bodies)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Spz)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Conditions)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InBazarFrom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Note)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ManufacturingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tachometer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fuels)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bodies)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Spz)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Conditions)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InBazarFrom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@{
+    ViewData["Title"] = "Ojeté vozy";
 }
-    </tbody>
-</table>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="row py-4">
+        @foreach (var item in Model)
+        {
+            <div class="card-container col-lg-6 col-xl-4">
+                <div class="card rounded-0 border-0 shadow card-anchor" data-anchor="@item.Id">
+                    <div class="card-body">
+                        <div class="card-heading">
+                            <h5>
+                                @item.Manufacturer
+                                @item.Model
+                            </h5>
+                            <div class="card-actions">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="material-icons-two-tone">
+                                    edit
+                                </a>
+                                @*<a asp-action="Delete" asp-route-id="@item.Id" class="material-icons-two-tone">
+                                    delete
+                                    </a>*@
+                                <span class="material-icons-two-tone" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="tryDelete">delete</span>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-info-item manufacture">
+                                <span class="material-icons-round">
+                                    construction
+                                </span>
+                                <p class="card-text">
+                                    @Html.DisplayFor(_ => item.ManufacturingDate.Year)
+                                </p>
+                            </div>
+                            <div class="card-info-item tachometer">
+                                <span class="material-icons-round">
+                                    speed
+                                </span>
+                                <p class="card-text">
+                                    @item.Tachometer km
+                                </p>
+                            </div>
+                            <div class="card-info-item fuel">
+                                <span class="material-icons-round">
+                                    ev_station
+                                </span>
+                                <p class="card-text">
+                                    @Html.DisplayFor(_ => item.Fuels)
+                                </p>
+                            </div>
+                            <div class="card-info-item condition">
+                                <span class="material-icons-round">
+                                    grading
+                                </span>
+                                <p class="card-text">
+                                    @Html.DisplayFor(_ => item.Conditions)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Opravdu chcete smazat toto auto?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Pokud toto auto odstraníte už bude navždy ztraceno.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" id="delete">Odstranit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+} else {
+    <h2 class="text-center py-4 display-6">Neevidujeme žádná auta!</h2>
+}
+
+
+@section Scripts {
+<script>
+    let deleteId = null;
+    $(".card-anchor").click(function(e) {
+        if(!$(e.target).is(".material-icons-two-tone")) {
+            $(location).attr('href', `/Cars/Details/${this.dataset.anchor}`);
+        };
+        if($(e.target).is("#tryDelete")) {
+            deleteId = this.dataset.anchor;
+        }
+    });
+
+    const deleteRequest = () => {
+        if(deleteId != null && $.isNumeric(deleteId)) {
+            $.get(`/Cars/Delete/${deleteId}`, () => {
+                location.reload();
+            })
+        }
+    }
+
+    $("#delete").click(deleteRequest);
+</script>
+}

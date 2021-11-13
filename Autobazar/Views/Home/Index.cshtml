@@ -6,39 +6,43 @@
     ViewData["Title"] = "Domů";
 }
 
-<section class="showcase showcase-first">
+<section class="showcase showcase-first container">
     <div class="showcase-info mt-5 mt-md-0">
         <h3 class="mb-3">ČÍSLO JEDNA!</h3>
         <p class="mb-0">Jsem nejlepší certifikovaný prodejce ojetých vozů s největší možnou zárukou kvality a jistoty.</p>
         <a asp-area="" asp-controller="Cars" asp-action="Index" class="btn btn-primary btn-lg mt-4">Nakupovat</a>
     </div>
     <div class="showcase-img mt-3 mt-md-0">
-        <img src="~/images/car.svg" alt="happy person with new car" />
+        <partial name="~/Views/Home/Partials/_landingSvg.cshtml" />
     </div>
     <div class="showcase-hint">
         <span class="material-icons-round">expand_more</span>
     </div>
 </section>
-<section class="showcase showcase-second">
+
+<section class="showcase showcase-second container">
     <h2>Proč si zvolit Vozový park autobazaru?</h2>
     <div class="showcase-cards">
         <div class="showcase-card">
             <span class="material-icons-round">directions_car</span>
             <h3 class="mb-3">Výběr</h3>
             <p class="mb-0">Vybírejte z více jak 12 000 prověřených vozů v ČR</p>
-            @*<a asp-area="" asp-controller="Cars" asp-action="Index" class="btn btn-primary btn-lg mt-4">Nakupovat</a>*@
         </div>
         <div class="showcase-card">
             <span class="material-icons-round">verified_user</span>
             <h3 class="mb-3">Záruka</h3>
             <p class="mb-0">Poskytujeme doživotní záruku na legální původ vozu</p>
-            @*<a asp-area="" asp-controller="Cars" asp-action="Index" class="btn btn-primary btn-lg mt-4">Nakupovat</a>*@
         </div>
         <div class="showcase-card">
             <span class="material-icons-round">speed</span>
             <h3 class="mb-3">Kontrola</h3>
             <p class="mb-0">Kontrola najetých kilometrů u každého z našich vozů</p>
-            @*<a asp-area="" asp-controller="Cars" asp-action="Index" class="btn btn-primary btn-lg mt-4">Nakupovat</a>*@
         </div>
     </div>
 </section>
+
+@section Scripts {
+<script>
+    $("main.container").removeClass("container");
+</script>
+}

@@ -7,4 +7,12 @@
     "outputFile": "wwwroot/css/views/home.css",
     "inputFile": "wwwroot/sass/views/home.scss"
   },
+  {
+    "outputFile": "wwwroot/css/views/list.css",
+    "inputFile": "wwwroot/sass/views/list.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/views/createEdit.css",
+    "inputFile": "wwwroot/sass/views/createEdit.scss"
+  }
 ]

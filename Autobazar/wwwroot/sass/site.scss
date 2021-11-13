@@ -21,6 +21,27 @@ body {
     margin-bottom: 60px;
 }
 
+main, body {
+    /* custom scrollbar */
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--scrollbarBG);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--thumbBG);
+        border-radius: 6px;
+        //border: 3px solid var(--scrollbarBG);
+    }
+
+    /*scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);*/
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -36,9 +57,42 @@ body {
 .btn-primary {
     background-color: var(--primary);
     color: #fff;
-    border: none;
+    border-color: var(--primary);
 }
 
 .btn-primary:hover, .btn-primary:focus {
     background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: var(--white);
+}
+
+.btn-submit {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.5rem 2rem;
+    border-radius: 2px;
+}
+
+.modal-content {
+    border: unset;
+}
+
+.modal-header {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.modal-body {
+    margin-bottom: 1rem;
 }

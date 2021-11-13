@@ -2,15 +2,31 @@
 @import "../partials/_animations";
 @import "../partials/_variables";
 
-.showcase {
-    height: calc(100vh - #{$nav-height-xs});
+main {
+    height: calc(100vh - (#{$nav-height-xs} + #{$footer-height}));
 
     @include media-up($breakpoint-sm) {
-        height: calc(100vh - #{$nav-height-sm});
+        height: calc(100vh - (#{$nav-height-sm} + #{$footer-height}));
     }
 
     @include media-up($breakpoint-md) {
-        height: calc(100vh - #{$nav-height-md});
+        height: calc(100vh - (#{$nav-height-md} + #{$footer-height}));
+    }
+
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+}
+
+.showcase {
+    scroll-snap-align: start;
+    height: calc(100vh - (#{$nav-height-xs} + #{$footer-height}));
+
+    @include media-up($breakpoint-sm) {
+        height: calc(100vh - (#{$nav-height-sm} + #{$footer-height}));
+    }
+
+    @include media-up($breakpoint-md) {
+        height: calc(100vh - (#{$nav-height-md} + #{$footer-height}));
     }
 }
 
@@ -40,6 +56,7 @@
     }
 
     .showcase-info {
+
         h3 {
             font-size: 2.5rem;
             font-weight: 700;
@@ -56,8 +73,9 @@
         display: grid;
         place-items: center;
 
-        img {
+        svg {
             width: 90%;
+            fill: var(--primary);
 
             @include media-up($breakpoint-md) {
                 width: 100%;
@@ -108,7 +126,7 @@
 
         & > :nth-child(2) {
             @include media-up($breakpoint-xl) {
-                box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 24px;
+                box-shadow: var(--shadow-card-big);
             }
         }
 
@@ -145,4 +163,12 @@
             text-align: center;
         }
     }
+}
+
+.navbar-brand, .nav-link, .showcase-first > .showcase-info {
+    animation: landingOpacity 0.33s ease;
+}
+
+.showcase-first > .showcase-info {
+    animation: landingOpacity 1s ease, landingTransform 1s ease;
 }

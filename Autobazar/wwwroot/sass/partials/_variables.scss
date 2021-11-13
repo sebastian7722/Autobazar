@@ -1,9 +1,15 @@
 ﻿:root {
-    --primary: hsl(356, 77%, 61%);
-    --primary-hover: hsl(356, 77%, 64%);
+    --primary-hue: 356;
+    --primary-saturation: 77%;
+    --primary: hsl(var(--primary-hue), var(--primary-saturation), 61%);
+    --primary-hover: hsl(var(--primary-hue), var(--primary-saturation), 64%);
     --white: #fff;
     --black: #000;
-    --black-accent: #212121;
+    --black-accent: hsl(0, 0%, 13%);
+    --gray-dark: hsl(0, 0%, 28%);
+    --scrollbarBG: transparent;
+    --thumbBG: hsl(0, 0%, 65%);
+    --shadow-card-big: rgba(0, 0, 0, 0.1) 0px 2px 24px;
 }
 
 /* NAVBAR HEIGHT */

@@ -58,9 +58,8 @@ public class CarsController : Controller
         if (ModelState.IsValid)
         {
             _context.Add(car);
-            int CurrentCarId = _context.Cars.Count() + 1;
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), new { id = CurrentCarId });
+            return RedirectToAction(nameof(Details), new { id = car.Id });
         }
         return View(car);
     }
@@ -117,7 +116,7 @@ public class CarsController : Controller
     }
 
     // GET: Cars/Delete/5
-    public async Task<IActionResult> Delete(int? id)
+    /*public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
         {
@@ -132,12 +131,10 @@ public class CarsController : Controller
         }
 
         return View(car);
-    }
+    }*/
 
     // POST: Cars/Delete/5
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         var car = await _context.Cars.FindAsync(id);
         if (car is not null)
@@ -182,7 +179,7 @@ public class CarsController : Controller
     {
         var editedCar = await _context.Cars.FirstOrDefaultAsync(x => x.Id == Id);
         var carWithSameSpz = await _context.Cars.FirstOrDefaultAsync(x => x.Spz == spz);
-        var errorMsg = Json($"Státní značka {spz} se již používá.");
+        var errorMsg = Json($"Státní značka se již používá.");
 
         if(carWithSameSpz==null || carWithSameSpz.Id == editedCar?.Id)
         {

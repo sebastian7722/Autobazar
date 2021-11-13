@@ -12,6 +12,7 @@
     @* Icons *@
     @* <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> *@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
     @*Css Section*@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -42,11 +43,9 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
 
     <footer class="border-top footer text-muted">
         <div class="container text-wrap">

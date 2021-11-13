@@ -14,3 +14,21 @@
         transform: translateY(3px);
     }
 }
+
+@keyframes landingOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+@keyframes landingTransform {
+    0% {
+        transform: translateX(-50px);
+    }
+    60% {
+        transform: translateX(0);
+    }
+}

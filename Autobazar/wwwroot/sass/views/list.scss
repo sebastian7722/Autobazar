@@ -1,0 +1,60 @@
+﻿@import "../partials/_variables";
+
+.card-container {
+    padding: 0.875rem;
+
+    .card a.material-icons-two-tone {
+        text-decoration: none;
+        color: var(--black-accent);
+    }
+
+    .card-anchor {
+        cursor: pointer;
+    }
+
+    .card .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+        padding: 2.5rem;
+
+        .card-heading {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+
+            h5 {
+                color: var(--primary);
+                font-weight: 700;
+                margin: 0;
+            }
+
+            .card-actions {
+                display: flex;
+
+                & :first-child {
+                    margin-right: 0.625rem;
+                }
+            }
+        }
+
+        .card-info {
+            width: 100%;
+            display: grid;
+            gap: 0.675rem;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+
+            .card-info-item {
+                & :first-child {
+                    margin-right: 0.5rem;
+                }
+
+                display: flex;
+                color: var(--gray-dark);
+            }
+        }
+    }
+}

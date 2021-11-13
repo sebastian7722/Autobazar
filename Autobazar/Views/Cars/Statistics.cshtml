@@ -4,13 +4,24 @@
     ViewData["Title"] = "Statistiky";
 }
 
-<h2 class="display-5 text-center">Statistiky našich vozů</h2>
-<h5>Celkový počet vozidel: @Model.CarsTotal</h5>
-<h5>Vozidla do 100 000 km: @Model.UnderOneHundredTotal</h5>
-<h5>Vozidla nad 100 000 km: @Model.AboveOneHundredTotal</h5>
-<h5>Benzínová vozidla: @Model.PetrolTotal</h5>
-<h5>Naftová vozidla: @Model.DieselTotal</h5>
-<h5>Elektroauta: @Model.ElectroTotal</h5>
-<h5>Auta na alternativní paliva: @Model.GasTotal</h5>
-<h5>Vozidla ve výborném stavu: @Model.ConditionGoodTotal</h5>
-<h5>Vozidla ve špatném stavu: @Model.ConditionBadTotal</h5>
+@{
+    if (Model != null && Model.CarsTotal > 0)
+    {
+        <div class="row py-4">
+            <h2 class="display-5 text-center">Statistiky našich vozů</h2>
+            <h5>Celkový počet vozidel: @Model.CarsTotal</h5>
+            <h5>Vozidla do 100 000 km: @Model.UnderOneHundredTotal</h5>
+            <h5>Vozidla nad 100 000 km: @Model.AboveOneHundredTotal</h5>
+            <h5>Benzínová vozidla: @Model.PetrolTotal</h5>
+            <h5>Naftová vozidla: @Model.DieselTotal</h5>
+            <h5>Elektroauta: @Model.ElectroTotal</h5>
+            <h5>Auta na alternativní paliva: @Model.GasTotal</h5>
+            <h5>Vozidla ve výborném stavu: @Model.ConditionGoodTotal</h5>
+            <h5>Vozidla ve špatném stavu: @Model.ConditionBadTotal</h5>
+        </div>
+    }
+    else
+    {
+        <h2 class="text-center py-4 display-6">Neevidujeme žádná auta!</h2>
+    }
+}
