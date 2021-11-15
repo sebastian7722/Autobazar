@@ -13,9 +13,8 @@
 }
 
 /* NAVBAR HEIGHT */
-$nav-height-xs: 49.250px;
-$nav-height-sm: 48.800px;
-$nav-height-md: 56px;
+
+$nav-height: ( xs: 49.250px, sm: 48.800px, md: 56px );
 
 /* FOOTER HEIGHT */
 $footer-height: 60px;

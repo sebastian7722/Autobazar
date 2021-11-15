@@ -1,40 +1,22 @@
 ﻿@import "../mixins/_breakpoints";
+@import "../mixins/_utilities";
 @import "../partials/_animations";
-@import "../partials/_variables";
 
 main {
-    height: calc(100vh - (#{$nav-height-xs} + #{$footer-height}));
-
-    @include media-up($breakpoint-sm) {
-        height: calc(100vh - (#{$nav-height-sm} + #{$footer-height}));
-    }
-
-    @include media-up($breakpoint-md) {
-        height: calc(100vh - (#{$nav-height-md} + #{$footer-height}));
-    }
-
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+    /*scroll-snap-type: y mandatory;
+    overflow-y: scroll;*/
 }
 
 .showcase {
-    scroll-snap-align: start;
-    height: calc(100vh - (#{$nav-height-xs} + #{$footer-height}));
-
-    @include media-up($breakpoint-sm) {
-        height: calc(100vh - (#{$nav-height-sm} + #{$footer-height}));
-    }
-
-    @include media-up($breakpoint-md) {
-        height: calc(100vh - (#{$nav-height-md} + #{$footer-height}));
-    }
+    /*scroll-snap-align: start;*/
 }
 
 .showcase-first {
+    @include container-showcase-first-height;
     display: grid;
     gap: 1rem;
 
-    @include media-up($breakpoint-md) {
+    @include media-breakpoint-up(md) {
         grid-template-columns: 1fr 1.5fr;
         grid-template-rows: 1fr 2fr 1fr;
 
@@ -77,11 +59,11 @@ main {
             width: 90%;
             fill: var(--primary);
 
-            @include media-up($breakpoint-md) {
+            @include media-breakpoint-up(md) {
                 width: 100%;
             }
 
-            @include media-up($breakpoint-lg) {
+            @include media-breakpoint-up(lg) {
                 width: 80%;
             }
         }
@@ -101,15 +83,14 @@ main {
 }
 
 .showcase-second {
-    @include media-down($breakpoint-lg) {
-        height: auto;
-    }
+    min-height: calc(100vh - #{$footer-height});
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 4rem 2rem 2rem;
 
     h2 {
         text-align: center;
@@ -125,7 +106,7 @@ main {
         justify-content: center;
 
         & > :nth-child(2) {
-            @include media-up($breakpoint-xl) {
+            @include media-breakpoint-up(xl) {
                 box-shadow: var(--shadow-card-big);
             }
         }
@@ -140,7 +121,7 @@ main {
             margin: 1rem;
             border-radius: 1rem;
 
-            @include media-up($breakpoint-xxl) {
+            @include media-breakpoint-up(xxl) {
                 flex: 0 1 320px;
             }
         }
@@ -165,10 +146,11 @@ main {
     }
 }
 
-.navbar-brand, .nav-link, .showcase-first > .showcase-info {
+/*.navbar-brand, .nav-link, .showcase-first > .showcase-info {
     animation: landingOpacity 0.33s ease;
 }
 
 .showcase-first > .showcase-info {
     animation: landingOpacity 1s ease, landingTransform 1s ease;
 }
+*/

@@ -14,5 +14,9 @@
   {
     "outputFile": "wwwroot/css/views/createEdit.css",
     "inputFile": "wwwroot/sass/views/createEdit.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/views/details.css",
+    "inputFile": "wwwroot/sass/views/details.scss"
   }
 ]

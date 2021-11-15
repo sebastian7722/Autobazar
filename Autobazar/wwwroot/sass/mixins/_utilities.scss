@@ -1,0 +1,54 @@
+﻿@import "../partials/_variables";
+@import "../mixins/_breakpoints";
+
+@mixin flex-center($direction: row) {
+    flex-direction: $direction;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin container-calc($breakpoint-name, $height-type: height) {
+    $nav-height-value: map-get($nav-height, $breakpoint-name);
+    #{$height-type}: calc(100vh - (#{$nav-height-value} + #{$footer-height});
+}
+
+@mixin container-calc-with-nav($breakpoint-name, $height-type: height) {
+    $nav-height-value: map-get($nav-height, $breakpoint-name);
+    #{$height-type}: calc(100vh - #{$nav-height-value});
+}
+
+@mixin container-showcase-first-height {
+    @include container-calc-with-nav(xs);
+
+    @include media-breakpoint-up(sm) {
+        @include container-calc-with-nav(sm);
+    }
+
+    @include media-breakpoint-up(md) {
+        @include container-calc-with-nav(md);
+    }
+}
+
+@mixin container-height {
+    @include container-calc(xs, height);
+
+    @include media-breakpoint-up(sm) {
+        @include container-calc(sm, height);
+    }
+
+    @include media-breakpoint-up(md) {
+        @include container-calc(md, height);
+    }
+}
+
+@mixin container-min-height {
+    @include container-calc(xs, min-height);
+
+    @include media-breakpoint-up(sm) {
+        @include container-calc(sm, min-height);
+    }
+
+    @include media-breakpoint-up(md) {
+        @include container-calc(md, min-height);
+    }
+}

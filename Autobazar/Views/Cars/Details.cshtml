@@ -1,83 +1,78 @@
 ﻿@model Autobazar.Models.Car
 
+@section Styles {
+<link rel="stylesheet" href="~/css/views/details.min.css" />
+}
+
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Car</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Manufacturer)
-        </dt>
-        <dd class="col-sm-10">
+<section class="details-container row">
+    <div class="col-sm-10 col-md-10 col-lg-10 col-xl-8 col-xxl-8">
+        <h2 class="heading-title mb-5">
             @Html.DisplayFor(model => model.Manufacturer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Model)
-        </dt>
-        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Model)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ManufacturingDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ManufacturingDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tachometer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tachometer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Fuels)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fuels)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bodies)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bodies)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Spz)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Spz)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Conditions)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Conditions)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InBazarFrom)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InBazarFrom)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-    </dl>
-</div>
-<div>
+        </h2>
+        <h5 class="heading-subtitle">Technické parametry</h5>
+        <div class="technic-params-container row mt-3">
+            <div class="col-md-6">
+
+                <div class="technic-params-item">
+                    <h6>@Html.DisplayNameFor(model => model.ManufacturingDate)</h6>
+                    <p>@Html.DisplayFor(model => model.ManufacturingDate)</p>
+                </div>
+                <div class="technic-params-item">
+                    <h6>Tachometr</h6>
+                    <p>@Html.DisplayFor(model => model.Tachometer) km</p>
+                </div>
+                <div class="technic-params-item">
+                    <h6>@Html.DisplayNameFor(model => model.Fuels)</h6>
+                    <p>@Html.DisplayFor(model => model.Fuels)</p>
+                </div>
+
+                <div class="technic-params-item">
+                    <h6>@Html.DisplayNameFor(model => model.Bodies)</h6>
+                    <p>@Html.DisplayFor(model => model.Bodies)</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="technic-params-item">
+                    <h6>@Html.DisplayNameFor(model => model.Spz)</h6>
+                    <p>@Html.DisplayFor(model => model.Spz)</p>
+                </div>
+                <div class="technic-params-item">
+                    <h6>@Html.DisplayNameFor(model => model.Conditions)</h6>
+                    <p>@Html.DisplayFor(model => model.Conditions)</p>
+                </div>
+                <div class="technic-params-item">
+                    <h6>@Html.DisplayNameFor(model => model.InBazarFrom)</h6>
+                    <p>@Html.DisplayFor(model => model.InBazarFrom)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="technic-decsription mt-4">
+            <h5 class="heading-subtitle">
+                @Html.DisplayNameFor(model => model.Note)
+            </h5>
+            <p>
+                @Html.DisplayFor(model => model.Note)
+            </p>
+        </div>
+        <div class="actions">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-submit">Zpět</a>
+        </div>
+
+    </div>
+</section>
+
+@*
     @{
-        if (Model is not null)
-        {
-            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-        }
+    if (Model is not null)
+    {
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
     }
-    <a asp-action="Index">Back to List</a>
-</div>
+    }
+    </div>
+*@

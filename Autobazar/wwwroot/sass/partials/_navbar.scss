@@ -6,11 +6,11 @@
     .navbar-brand {
         max-width: 65vw;
 
-        @include media-up($breakpoint-sm) {
+        @include media-breakpoint-up(sm) {
             max-width: 25vw;
         }
 
-        @include media-up($breakpoint-md) {
+        @include media-breakpoint-up(md) {
             max-width: 100%;
         }
     }

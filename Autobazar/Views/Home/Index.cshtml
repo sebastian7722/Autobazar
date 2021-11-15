@@ -42,7 +42,60 @@
 </section>
 
 @section Scripts {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js"></script>
 <script>
-    $("main.container").removeClass("container");
+    $("main.container").removeAttr("class");
+
+    $(".showcase-hint > span").click(() => {
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $(".showcase-second").offset().top
+        }, 750);
+    });
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const sections = gsap.utils.toArray('.showcase')
+
+    ScrollTrigger.create({
+  
+      trigger: 'header',
+      start: 'top top',
+      endTrigger: '.footer',
+      end: 'bottom bottom',
+      markers: false,
+      snap: {
+        snapTo: 1 / (sections.length - 1),
+        duration: {min: 0.25, max: 0.75},
+        delay: 0.125,
+        ease: "power1.inOut"
+      }
+  
+    })
+
+    gsap.fromTo(".showcase-info", {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 1});
+
+    const tl1 = gsap.timeline({
+        scrollTrigger: {
+        trigger: ".showcase-first",
+        start: "80% top",
+        toggleActions: "none none none restart",
+        markers: false
+      }
+    });
+
+    tl1.fromTo(".showcase-info", {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 1});
+
+    const tl2 = gsap.timeline({
+        scrollTrigger: {
+        trigger: ".showcase-second > h2",
+        start: "top bottom",
+        toggleActions: "restart none none none",
+        markers: false
+        }
+    });
+
+    tl2.fromTo(".showcase-second", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 1, delay: 0.5});
+
 </script>
 }
